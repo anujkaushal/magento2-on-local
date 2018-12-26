@@ -1,0 +1,26 @@
+version: '3.0'
+services:
+  web:
+    image: alexcheng/magento2
+    ports:
+      - "32821:80"
+    links:
+      - db
+    env_file:
+      - env.conf
+#    volumes:
+#      - /home/anuj/Work/code:/var/www/html
+  db:
+    image: mysql:5.6.23
+    volumes:
+      - /home/anuj/Work/mysqldata:/var/lib/mysql/data
+    env_file:
+      - env.conf
+    ports:
+      - '32822:3306'
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "32823:80"
+    links:
+      - db
